@@ -1,23 +1,20 @@
-import {observable, computed, asStructure} from 'mobx';
+import {observable, action} from 'mobx';
 
-class UiState {
-    @observable language = "en_US";
-    @observable pendingRequestCount = 0;
+class AppState {	
+	@observable fullName: string;
+	@observable address: string;
+	@observable dataOfBirth: string;
+	@observable selectedFormulaId: number;
 
-    // asStructure makes sure observer won't be signaled only if the
-    // dimensions object changed in a deepEqual manner
-    @observable windowDimensions = asStructure({
+	changePerson(key: string, value: string): void {
+    this[key] = value;
+	}
+	
+	selectFormula(formulaId: number): void {
+		this.selectedFormulaId = formulaId;
+	}
 
-    });
-
-    constructor() {
-
-    }
-
-    @computed get appIsInSync() {
-        return this.pendingRequestCount === 0
-    }
 }
 
-const singleton = new UiState();
-export default singleton;
+const appStateSingleton = new AppState();
+export default appStateSingleton;
