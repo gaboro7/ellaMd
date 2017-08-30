@@ -8,14 +8,17 @@ import "!style-loader!css-loader!sass-loader!./styles.scss";
 
 import Header from '../Header';
 import UserForm from '../UserForm';
+import FormulaFinder from '../FormulaFinder';
 
 
-
-export default class MainContainer extends React.Component<{ person: any }, undefined> {
+@observer
+export default class MainContainer extends React.Component<{ appState: any }, undefined> {
 	render() {
+		const { appState } = this.props;
 		return <div>
 			<Header/>
-			<UserForm person={this.props.person}/>
+			<UserForm appState={appState}/>
+			<FormulaFinder appState={appState}/>		
 			<DevTools/>
 		</div>;
 	}

@@ -7,7 +7,7 @@ import appState from './store/AppStore';
 class App extends React.Component<{appState: any}, any> {
 	render() {
 		return (
-			<MainContainer person={this.props.appState.person}/>
+			<MainContainer appState={this.props.appState}/>
 		);
 	}
 };

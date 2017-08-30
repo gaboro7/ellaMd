@@ -1,11 +1,11 @@
 import * as React from "react";
 import { DateInput } from '@blueprintjs/datetime';
-import {observer} from 'mobx-react'
+import { observer } from 'mobx-react'
 
 import "!style-loader!css-loader!sass-loader!./styles.scss";
 
 @observer
-export default class UserForm extends React.Component<{ person: any }, any> {
+export default class UserForm extends React.Component<{ appState: any }, any> {
     constructor (props: any) {
       super(props)
 
@@ -14,7 +14,7 @@ export default class UserForm extends React.Component<{ person: any }, any> {
     }
 
     updateProperty (key, value) {
-      this.props.person[key] = value
+      this.props.appState.changePerson(key, value);
     }
 
     onChange (event) {

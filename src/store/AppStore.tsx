@@ -1,13 +1,19 @@
-import {observable, computed, asStructure} from 'mobx';
+import {observable, action} from 'mobx';
 
-interface Person {
-	fullName?: string;
-	address?: string;
-	dataOfBirth?: string
-}
+class AppState {	
+	@observable fullName: string;
+	@observable address: string;
+	@observable dataOfBirth: string;
+	@observable selectedFormulaId: number;
 
-class AppState {
-  @observable person:  Person = {};
+	changePerson(key: string, value: string): void {
+    this[key] = value;
+	}
+	
+	selectFormula(formulaId: number): void {
+		this.selectedFormulaId = formulaId;
+	}
+
 }
 
 const appStateSingleton = new AppState();
