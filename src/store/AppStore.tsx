@@ -1,23 +1,40 @@
-import {observable, computed, asStructure} from 'mobx';
+import {observable, action} from 'mobx';
+import { User, Formulation, Ingredient } from '../interfaces';
 
-class UiState {
-    @observable language = "en_US";
-    @observable pendingRequestCount = 0;
+export class AppState {	
+	@observable user: User;
+	@observable selectedFormula: Formulation;
+	@observable ingredientList: Array<Ingredient>; 
+	@observable formulationList: Array<Formulation>; 
 
-    // asStructure makes sure observer won't be signaled only if the
-    // dimensions object changed in a deepEqual manner
-    @observable windowDimensions = asStructure({
+	constructor() {
+		this.ingredientList = [];
+		this.user = {
+			fullName: '',
+			address: '',
+			dataOfBirth: ''
+		};
+		this.formulationList = [];
+		fetch('http://localhost:3000/v1/formulations',
+		{
+			method: 'GET'
+		})
+		.then((res) => res.json())
+		.then((formulations : Array<Formulation>) => { 
+			this.formulationList = formulations;
+		});
+	}
 
-    });
+	changePerson(key: string, value: string): void {
+    this.user[key] = value;
+	}
+	
+	selectFormula(formula: Formulation): void {
+		this.selectedFormula = formula;
+	}
 
-    constructor() {
+	addMedicineToFormula(medicine: Ingredient): void {
+		this.ingredientList.push(medicine)
+	}
 
-    }
-
-    @computed get appIsInSync() {
-        return this.pendingRequestCount === 0
-    }
 }
-
-const singleton = new UiState();
-export default singleton;
