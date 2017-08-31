@@ -6,20 +6,20 @@ import "!style-loader!css-loader!sass-loader!./styles.scss";
 
 @observer
 export default class UserForm extends React.Component<{ appState: any }, any> {
-    constructor (props: any) {
-      super(props)
+  constructor (props: any) {
+    super(props)
 
-      this.updateProperty = this.updateProperty.bind(this)
-      this.onChange = this.onChange.bind(this)
-    }
+    this.updateProperty = this.updateProperty.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
 
-    updateProperty (key, value) {
-      this.props.appState.changePerson(key, value);
-    }
+  updateProperty (key, value) {
+    this.props.appState.changePerson(key, value);
+  }
 
-    onChange (event) {
-      this.updateProperty(event.target.name, event.target.value)
-    }
+  onChange (event) {
+    this.updateProperty(event.target.name, event.target.value);
+  }
 
 
   render () {

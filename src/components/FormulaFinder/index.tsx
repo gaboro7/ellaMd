@@ -3,39 +3,41 @@ import { observer } from 'mobx-react'
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/labs";
 import "!style-loader!css-loader!sass-loader!./styles.scss";
+import { AppState } from '../..';
+import { Formulation } from '../../interfaces';
 
-const TOP_100_FILMS = [{id: 1, name: "name 1"}, {id: 2, name: "name 2"}, {id: 3, name: "name 3"}];
-const FormulaSelect = Select.ofType<any>();
+const FormulaSelect = Select.ofType<Formulation>();
 
 @observer
-export default class FormulaFinder extends React.Component<{ appState: any }, any> {
+export default class FormulaFinder extends React.Component<{appState: AppState}, {}> {
   constructor (props: any) {
     super(props)
     this.onSelectFormula = this.onSelectFormula.bind(this);
   }
 
   onSelectFormula(formula) {
-    this.props.appState.selectFormula(formula.id);
+    this.props.appState.selectFormula(formula);
   }
 
   render () {
     const {
       appState: {
-        selectedFormulaId
+        selectedFormula,
+        formulationList
       }
     } = this.props
     return <div className="usuer-information-card-container">
       <div className="pt-card pt-elevation-1">
         <h5><a href="#">Find your base formula</a></h5>
         <FormulaSelect
-          items={TOP_100_FILMS}
-          itemPredicate={(query: string, item: any, index: number): boolean => {
-            return item.name.indexOf(query) !== -1;
+          items={formulationList}
+          itemPredicate={(query: string, item: Formulation, index: number): boolean => {
+            return item.name.toLocaleUpperCase().indexOf(query.toLocaleUpperCase()) !== -1;
           }}
           itemRenderer={(value) => {
             return <MenuItem 
               key={value.item.id}
-              label={value.item.name}  
+              label={''}  
               onClick={value.handleClick}
               text={value.item.name}
             />;
@@ -43,14 +45,14 @@ export default class FormulaFinder extends React.Component<{ appState: any }, an
           noResults={<MenuItem disabled text="No results." />}
           onItemSelect={this.onSelectFormula}
         >
-            {/* children become the popover target; render value here */}
           <Button 
             text={
-              selectedFormulaId ?
-              TOP_100_FILMS.find((formula) => formula.id === selectedFormulaId).name :
+              selectedFormula && selectedFormula.id ?
+              formulationList.find((formula) => formula.id === selectedFormula.id).name :
               'Find your formula'
             } 
             rightIconName="double-caret-vertical" 
+            className=".pt-intent-success"
           />
         </FormulaSelect>
       </div>

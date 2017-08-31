@@ -1,20 +1,40 @@
 import {observable, action} from 'mobx';
+import { User, Formulation, Ingredient } from '../interfaces';
 
-class AppState {	
-	@observable fullName: string;
-	@observable address: string;
-	@observable dataOfBirth: string;
-	@observable selectedFormulaId: number;
+export class AppState {	
+	@observable user: User;
+	@observable selectedFormula: Formulation;
+	@observable ingredientList: Array<Ingredient>; 
+	@observable formulationList: Array<Formulation>; 
+
+	constructor() {
+		this.ingredientList = [];
+		this.user = {
+			fullName: '',
+			address: '',
+			dataOfBirth: ''
+		};
+		this.formulationList = [];
+		fetch('http://localhost:3000/v1/formulations',
+		{
+			method: 'GET'
+		})
+		.then((res) => res.json())
+		.then((formulations : Array<Formulation>) => { 
+			this.formulationList = formulations;
+		});
+	}
 
 	changePerson(key: string, value: string): void {
-    this[key] = value;
+    this.user[key] = value;
 	}
 	
-	selectFormula(formulaId: number): void {
-		this.selectedFormulaId = formulaId;
+	selectFormula(formula: Formulation): void {
+		this.selectedFormula = formula;
+	}
+
+	addMedicineToFormula(medicine: Ingredient): void {
+		this.ingredientList.push(medicine)
 	}
 
 }
-
-const appStateSingleton = new AppState();
-export default appStateSingleton;
