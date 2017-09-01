@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "EllaMD: Quick coding test",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --config webpack.config.prod.js --watch"
   },
   "repository": {
     "type": "git",
