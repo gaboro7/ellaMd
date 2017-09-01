@@ -8,6 +8,7 @@ import "!style-loader!css-loader!sass-loader!./styles.scss";
 import Header from '../Header';
 import UserForm from '../UserForm';
 import FormulaFinder from '../FormulaFinder';
+import IngredientList from '../IngredientList';
 import {AppState} from '../..';
 
 @observer
@@ -16,8 +17,15 @@ export default class MainContainer extends React.Component<{appState: AppState},
 		const { appState } = this.props;
 		return <div>
 			<Header/>
-			<UserForm appState={appState}/>
-			<FormulaFinder appState={appState}/>		
+			<div className="wrapper">
+				<div className="list-wrapper">	
+					<UserForm appState={appState}/>
+				</div>
+				<div className="list-wrapper">
+					<FormulaFinder appState={appState}/>		
+					<IngredientList appState={appState}/>
+				</div>
+			</div>
 			<DevTools/>
 		</div>;
 	}

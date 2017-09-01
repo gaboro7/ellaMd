@@ -4,5 +4,5 @@ export default interface Ingredient {
   minimumPercentage: number;
   maximumPercentage: number;
   description: string;
-  classes: Array<string>;
+  featuresNames: Array<string>;
 }

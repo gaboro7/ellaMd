@@ -1,1 +1,12 @@
 @import '~@blueprintjs/datetime/dist/blueprint-datetime.css';
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
