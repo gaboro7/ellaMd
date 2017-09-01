@@ -3,6 +3,7 @@ export default interface Ingredient {
   name?: string;
   minimumPercentage: number;
   maximumPercentage: number;
+  percentage: number;
   description: string;
-  featuresNames: Array<string>;
+  featureNames: Array<string>;
 }

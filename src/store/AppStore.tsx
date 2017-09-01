@@ -1,14 +1,14 @@
 import {observable, action} from 'mobx';
-import { User, Formulation, Ingredient } from '../interfaces';
+import { User, Formulation, Ingredient, FormulationIngredient } from '../interfaces';
 
 const baseUrl = 'https://testellamd-be.herokuapp.com';
 
-export class AppState {	
+export class AppState {
 	@observable user: User;
 	@observable selectedFormula: Formulation;
-	@observable ingredientList: Array<Ingredient>; 
-	@observable fullIngredientList: Array<Ingredient>; 
-	@observable formulationList: Array<Formulation>; 
+	@observable ingredientList: Array<Ingredient>;
+	@observable fullIngredientList: Array<Ingredient>;
+	@observable formulationList: Array<Formulation>;
 
 	constructor() {
 		this.ingredientList = [];
@@ -23,7 +23,7 @@ export class AppState {
 			method: 'GET'
 		})
 		.then((res) => res.json())
-		.then((formulations : Array<Formulation>) => { 
+		.then((formulations : Array<Formulation>) => {
 			this.formulationList = formulations;
 		});
 
@@ -32,20 +32,28 @@ export class AppState {
 			method: 'GET'
 		})
 		.then((res) => res.json())
-		.then((formulations : Array<Ingredient>) => { 
+		.then((formulations : Array<Ingredient>) => {
 			this.fullIngredientList = formulations;
 		});
 	}
-	
+
 	changePerson(key: string, value: string): void {
 		this.user[key] = value;
 	}
-	
+
 	selectFormula(formula: Formulation): void {
 		this.selectedFormula = formula;
-		this.ingredientList = this.selectedFormula.ingredientIds.map((ingredientId) => 
-			this.fullIngredientList.find((ingredient) => ingredient.id === ingredientId)
+		this.ingredientList = this.selectedFormula.formulationIngredients.map((formulationIngredient) => {
+			const ingredient = this.fullIngredientList.find((ingredient) => ingredient.id === formulationIngredient.ingredientId);
+			ingredient['percentage'] = formulationIngredient.percentage;
+			return ingredient;
+		}
 		);
+	}
+
+	changePercentage(ingredientId:number, percentage: number) {
+		const ingredientIndex = this.ingredientList.findIndex((ingredient) => ingredient.id === ingredientId);
+	  this.ingredientList[ingredientIndex] = { ...this.ingredientList[ingredientIndex] , percentage };
 	}
 
 	addMedicineToFormula(medicine: Ingredient): void {

@@ -1,5 +1,7 @@
+import FormulationIngredient from './FormulationIngredient';
+
 export default interface Formulation {
   id?: number;
   name?: string;
-  ingredientIds?: Array<Number>;
+  formulationIngredients?: Array<FormulationIngredient>;
 }
