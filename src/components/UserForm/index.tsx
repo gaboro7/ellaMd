@@ -22,7 +22,7 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
 
   render () {
     return <div className="ellamd-card">
-      <div className="pt-card pt-elevation-1">
+      <div className="pt-card pt-elevation-1  ellamd-ingredient-list">
         <h5><a href="#">User Information</a></h5>
         <div className="ellamd-user-form">
           <div className="pt-form-group">

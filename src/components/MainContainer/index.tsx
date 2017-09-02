@@ -15,12 +15,26 @@ import {AppState} from '../..';
 export default class MainContainer extends React.Component<{appState: AppState}, {}> {
 	render() {
 		const { appState } = this.props;
+		
 		return <div>
 			<Header/>
 			<div className="wrapper">
-				<div className="list-wrapper">	
-					<FormulaFinder appState={appState}/>		
+				<div className="list-wrapper">				
 					<UserForm appState={appState}/>
+				</div>
+				<div className="list-wrapper">
+					<nav className="pt-navbar .modifier ella-md-card">
+						<div className="pt-navbar-group pt-align-left">
+							<div className="pt-navbar-heading">Find your Formulation</div>
+							<FormulaFinder appState={appState}/>
+						</div>
+						<div className="pt-navbar-group pt-align-right">
+							<div className="pt-navbar-heading">
+								Total Percentage {appState.totalPercentage}%
+							</div>
+							<button className="pt-button pt-minimal pt-icon-print">Print Formulation</button>
+						</div>
+					</nav>
 				</div>
 				<div className="list-wrapper">
 					<IngredientList appState={appState}/>

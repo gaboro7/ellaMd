@@ -34,12 +34,14 @@ export default class IngredientList extends React.Component<{ appState: any }, a
   }
 
   private addIngredient = (ingredient: Ingredient) => {
-    this.setState({ingredientIdLeaving: ingredient.id});
-    setTimeout(() => {
-      this.props.appState.addIngredientToFormula(ingredient);
-      this.setState({ingredientIdLeaving: ''});
+    if(this.state.ingredientIdLeaving == '') {
+      this.setState({ingredientIdLeaving: ingredient.id});
+      setTimeout(() => {
+        this.props.appState.addIngredientToFormula(ingredient);
+        this.setState({ingredientIdLeaving: ''});
+      }
+      ,300);
     }
-    ,500);
   }
   
   private onChangePercentage = (ingredientId: number) => {
@@ -65,14 +67,19 @@ export default class IngredientList extends React.Component<{ appState: any }, a
             )}
           </div>
           <div className="ellamd-slide">
-            <Slider
-              min={ingredient.minimumPercentage}
-              max={ingredient.maximumPercentage}
-              stepSize={0.01}
-              onChange={this.onChangePercentage(ingredient.id)}
-              showTrackFill={false}
-              value={ingredient.percentage}
-              />
+            <div>
+              Persentage: 
+            </div>
+            <div>
+              <Slider
+                min={ingredient.minimumPercentage}
+                max={ingredient.maximumPercentage}
+                stepSize={0.01}
+                onChange={this.onChangePercentage(ingredient.id)}
+                showTrackFill={false}
+                value={ingredient.percentage}
+                />
+            </div>
           </div>
         </div>     
       </div>

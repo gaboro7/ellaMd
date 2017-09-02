@@ -60,6 +60,8 @@
 
 .ellamd-slide {
   padding: 0 20px;
+  display: flow-root;
+  flex-direction: row;
 }
 
 .ellamd-remove-ingredient {
@@ -74,7 +76,7 @@
 
 .ella-md-ingredient-item-enter.ella-md-ingredient-item-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .ella-md-ingredient-item-leave {
@@ -83,7 +85,7 @@
 
 .ella-md-ingredient-item-leave.ella-md-ingredient-item-leave-active {
   opacity: 0.01;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .ellamd-add-ingredient {
@@ -108,4 +110,8 @@
   -webkit-transform: none;
   transform: none;
   min-width: 726px;
+}
+
+.ella-md-card {
+  width: 1222;
 }
