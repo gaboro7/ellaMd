@@ -19,10 +19,10 @@ export default class MainContainer extends React.Component<{appState: AppState},
 			<Header/>
 			<div className="wrapper">
 				<div className="list-wrapper">	
+					<FormulaFinder appState={appState}/>		
 					<UserForm appState={appState}/>
 				</div>
 				<div className="list-wrapper">
-					<FormulaFinder appState={appState}/>		
 					<IngredientList appState={appState}/>
 				</div>
 			</div>

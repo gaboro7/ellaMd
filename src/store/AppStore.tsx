@@ -51,6 +51,11 @@ export class AppState {
 		);
 	}
 
+	removeIngredient(ingredientId: number) {
+		const ingredientIndex = this.ingredientList.findIndex((ingredient) => ingredient.id === ingredientId);
+		this.ingredientList.splice(ingredientIndex, 1);
+	}
+
 	changePercentage(ingredientId:number, percentage: number) {
 		const ingredientIndex = this.ingredientList.findIndex((ingredient) => ingredient.id === ingredientId);
 	  this.ingredientList[ingredientIndex] = { ...this.ingredientList[ingredientIndex] , percentage };

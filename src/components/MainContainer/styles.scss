@@ -1,12 +1,86 @@
 @import '~@blueprintjs/datetime/dist/blueprint-datetime.css';
-.wrapper {
-  display: flex;
-  flex-direction: row;
-}
 
 .list-wrapper {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center
+}
+
+.usuer-information-card-container {
+  padding: 10px;
+  margin: 10px;
+  width: 400px;
+}
+
+.input-width {
+  width: 300px;
+}
+
+.ellamd-tag {
+  margin-right: 4px;
+  margin-bottom: 2px;
+}
+
+.ellamd-callout {
+  margin-bottom: 5px;
+}
+
+.ellamd-card {
+  margin: 10;
+  display: flex;
+}
+
+.ellamd-user-form {
+  display: flex;
+  flex-direction: row;
+  .pt-form-group {
+    padding-right: 15px;
+  }
+}
+
+.pt-menu {
+  max-width: 400px;
+  max-height: 305px;
+  overflow: auto;
+  padding: 0;
+}
+
+.ellamd-find-formula {
+  width: 300px;
+  max-width: 300px;
+  max-height: 148px;
+}
+
+.ellamd-ingredient-list {
+  width: 1222;
+  max-height: 568px;
+  overflow: auto;
+}
+
+.ellamd-slide {
+  padding: 0 20px;
+}
+
+.ellamd-remove-ingredient {
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+}
+
+.ella-md-ingredient-item-enter {
+  opacity: 0.01;
+}
+
+.ella-md-ingredient-item-enter.ella-md-ingredient-item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.ella-md-ingredient-item-leave {
+  opacity: 1;
+}
+
+.ella-md-ingredient-item-leave.ella-md-ingredient-item-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
 }
