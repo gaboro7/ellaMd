@@ -2,10 +2,10 @@ import * as React from "react";
 import { DateInput } from '@blueprintjs/datetime';
 import { observer } from 'mobx-react'
 
-import "!style-loader!css-loader!sass-loader!./styles.scss";
+import {AppState} from '../..';
 
 @observer
-export default class UserForm extends React.Component<{ appState: any }, any> {
+export default class UserForm extends React.Component<{ appState: AppState }, any> {
   constructor (props: any) {
     super(props)
 
@@ -23,57 +23,67 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
 
 
   render () {
-    return <div className="usuer-information-card-container">
-      <div className="pt-card pt-elevation-1">
+    const {
+      user:{
+        fullName,
+        address,
+        dateOfBirth
+      }
+    } = this.props.appState;
+    return <div className="ellamd-card">
+      <div className="pt-card pt-elevation-1 ellamd-user-information">
         <h5><a href="#">User Information</a></h5>
-        <div className="pt-form-group">
-          <label className="pt-label">
-            Complete Name
-            <span className="pt-text-muted">(required)</span>
-          </label>
-          <div className="pt-form-content">
-            <input
-              className="pt-input input-width"
-              placeholder="Complete Name"
-              type="text"
-              dir="auto"
-              onChange={this.onChange}
-              name="fullName"
-            />
-          </div>
-        </div>
-        <div className="pt-form-group">
-          <label className="pt-label" htmlFor="example-form-group-input-a">
-            Adrress
-            <span className="pt-text-muted">(required)</span>
-          </label>
-          <div className="pt-form-content">
-            <input
-              className="pt-input input-width"
-              placeholder="Address"
-              type="text"
-              dir="auto"
-              onChange={this.onChange}
-            />
-          </div>
-        </div>
-        <div className="pt-form-group">
-          <label className="pt-label" htmlFor="example-form-group-input-b">
-            Date of Birth
-            <span className="pt-text-muted">(required)</span>
-          </label>
-          <div className="pt-form-content">
-            <div className="pt-input-group">
-              <DateInput
-                onChange={(newDate) => this.updateProperty('dataOfBirth', newDate)}
+        <div className="ellamd-user-form">
+          <div className="pt-form-group">
+            <label className="pt-label">
+              Complete Name
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                className="pt-input input-width"
+                placeholder="Complete Name"
+                type="text"
+                dir="auto"
+                onChange={this.onChange}
+                name="fullName"
+                value={fullName}
               />
             </div>
           </div>
+          <div className="pt-form-group">
+            <label className="pt-label">
+              Adrress
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                className="pt-input input-width"
+                placeholder="Address"
+                type="text"
+                dir="auto"
+                name="address"
+                onChange={this.onChange}
+                value={address}
+              />
+            </div>
+          </div>
+          <div className="pt-form-group">
+            <label className="pt-label">
+              Date of Birth
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <div className="pt-input-group">
+                <DateInput
+                  onChange={(newDate) => this.updateProperty('dateOfBirth', newDate)}
+                  value={dateOfBirth}
+                  minDate={new Date('1901/01/01')}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <button type="button" className="pt-button pt-intent-success">
-          Next step
-          <span className="pt-icon-standard pt-icon-arrow-right pt-align-right"></span>
-        </button>
       </div>
     </div>
   }

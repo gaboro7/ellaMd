@@ -2,7 +2,7 @@ import * as React from "react";
 import { observer } from 'mobx-react'
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/labs";
-import "!style-loader!css-loader!sass-loader!./styles.scss";
+
 import { AppState } from '../..';
 import { Formulation } from '../../interfaces';
 
@@ -26,9 +26,8 @@ export default class FormulaFinder extends React.Component<{appState: AppState},
         formulationList
       }
     } = this.props
-    return <div className="usuer-information-card-container">
-      <div className="pt-card pt-elevation-1">
-        <h5><a href="#">Find your base formula</a></h5>
+    return (
+      <div className="pt-form-content">
         <FormulaSelect
           items={formulationList}
           itemPredicate={(query: string, item: Formulation, index: number): boolean => {
@@ -49,13 +48,13 @@ export default class FormulaFinder extends React.Component<{appState: AppState},
             text={
               selectedFormula && selectedFormula.id ?
               formulationList.find((formula) => formula.id === selectedFormula.id).name :
-              'Find your formula'
+              'Formlations'
             } 
             rightIconName="double-caret-vertical" 
-            className=".pt-intent-success"
+            className="pt-large"
           />
         </FormulaSelect>
-      </div>
-    </div>
+      </div> 
+    );
   }
 }
