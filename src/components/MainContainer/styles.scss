@@ -28,6 +28,7 @@
 .ellamd-card {
   margin: 10;
   display: flex;
+  position: relative;
 }
 
 .ellamd-user-form {
@@ -83,4 +84,28 @@
 .ella-md-ingredient-item-leave.ella-md-ingredient-item-leave-active {
   opacity: 0.01;
   transition: opacity 500ms ease-in;
+}
+
+.ellamd-add-ingredient {
+  position: absolute;
+  top: 20px;
+  right: 32px;
+  color: #0f9960;
+}
+
+.ellamd-big-icon {
+  font-size: 37px !important;
+  cursor: pointer;
+}
+
+.pt-dialog-body.ella-md-dialog {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.pt-dialog-container .pt-dialog {
+  position: static !important;
+  -webkit-transform: none;
+  transform: none;
+  min-width: 726px;
 }

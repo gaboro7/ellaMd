@@ -1,4 +1,4 @@
-import {observable, action} from 'mobx';
+import {observable, computed} from 'mobx';
 import { User, Formulation, Ingredient, FormulationIngredient } from '../interfaces';
 
 const baseUrl = 'https://testellamd-be.herokuapp.com';
@@ -11,13 +11,14 @@ export class AppState {
 	@observable formulationList: Array<Formulation>;
 
 	constructor() {
-		this.ingredientList = [];
 		this.user = {
 			fullName: '',
 			address: '',
 			dataOfBirth: ''
 		};
 		this.formulationList = [];
+		this.fullIngredientList = [];
+		this.ingredientList = [];
 		fetch(`${baseUrl}/v1/formulations`,
 		{
 			method: 'GET'
@@ -61,8 +62,15 @@ export class AppState {
 	  this.ingredientList[ingredientIndex] = { ...this.ingredientList[ingredientIndex] , percentage };
 	}
 
-	addMedicineToFormula(medicine: Ingredient): void {
-		this.ingredientList.push(medicine)
+	addIngredientToFormula(ingredient: Ingredient): void {
+		this.ingredientList.unshift({ ...ingredient, percentage: ingredient.minimumPercentage });
+	}
+
+	@computed get notUsedIngredients() {
+		return this.fullIngredientList
+		.filter((ingedient) =>  
+			this.ingredientList.findIndex((ingredientUsed) => ingredientUsed.id === ingedient.id) == -1
+		);
 	}
 
 }
