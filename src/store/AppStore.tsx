@@ -14,7 +14,7 @@ export class AppState {
 		this.user = {
 			fullName: '',
 			address: '',
-			dataOfBirth: ''
+			dateOfBirth: new Date()
 		};
 		this.formulationList = [];
 		this.fullIngredientList = [];

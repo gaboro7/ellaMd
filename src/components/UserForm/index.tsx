@@ -2,8 +2,10 @@ import * as React from "react";
 import { DateInput } from '@blueprintjs/datetime';
 import { observer } from 'mobx-react'
 
+import {AppState} from '../..';
+
 @observer
-export default class UserForm extends React.Component<{ appState: any }, any> {
+export default class UserForm extends React.Component<{ appState: AppState }, any> {
   constructor (props: any) {
     super(props)
 
@@ -21,8 +23,15 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
 
 
   render () {
+    const {
+      user:{
+        fullName,
+        address,
+        dateOfBirth
+      }
+    } = this.props.appState;
     return <div className="ellamd-card">
-      <div className="pt-card pt-elevation-1  ellamd-ingredient-list">
+      <div className="pt-card pt-elevation-1 ellamd-user-information">
         <h5><a href="#">User Information</a></h5>
         <div className="ellamd-user-form">
           <div className="pt-form-group">
@@ -38,6 +47,7 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
                 dir="auto"
                 onChange={this.onChange}
                 name="fullName"
+                value={fullName}
               />
             </div>
           </div>
@@ -52,7 +62,9 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
                 placeholder="Address"
                 type="text"
                 dir="auto"
+                name="address"
                 onChange={this.onChange}
+                value={address}
               />
             </div>
           </div>
@@ -64,7 +76,9 @@ export default class UserForm extends React.Component<{ appState: any }, any> {
             <div className="pt-form-content">
               <div className="pt-input-group">
                 <DateInput
-                  onChange={(newDate) => this.updateProperty('dataOfBirth', newDate)}
+                  onChange={(newDate) => this.updateProperty('dateOfBirth', newDate)}
+                  value={dateOfBirth}
+                  minDate={new Date('1901/01/01')}
                 />
               </div>
             </div>

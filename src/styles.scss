@@ -58,6 +58,11 @@
   overflow: auto;
 }
 
+.ellamd-user-information {
+  width: 1222;
+  max-height: 568px;
+}
+
 .ellamd-slide {
   padding: 0 20px;
   display: flow-root;
@@ -93,6 +98,7 @@
   top: 20px;
   right: 32px;
   color: #0f9960;
+  z-index: 5;
 }
 
 .ellamd-big-icon {
@@ -114,4 +120,60 @@
 
 .ella-md-card {
   width: 1222;
+}
+
+
+#react-print {
+  display: none;
+}
+
+.pt-callout {
+  line-height: 1.5;
+  font-size: 14px;
+  position: relative;
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 10px 12px 9px;
+  border: 1px solid #ccc;
+}
+
+@media print {
+  #web-section {
+    display: none;
+  }
+
+  #react-print {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h5 {
+      color: #106ba3;
+      font-weight: 600;
+      margin: 0 0 10px;
+      padding: 0;
+      line-height: 0.9em;
+      font-size: 17px;
+    }
+  
+    label {
+      color: #182026;
+      font-weight: 500;
+      margin: 0 7px 14px 0;
+      font-size: 17px;
+    }
+    th {
+      label {
+        text-align: left;
+      }
+    }
+    .print-card {
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 5px;
+      border-radius: 3px;
+      width: 80%
+    }
+  }
+
+  
 }

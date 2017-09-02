@@ -54,7 +54,8 @@ export default class IngredientList extends React.Component<{ appState: any }, a
     const { ingredientList, notUsedIngredients } = this.props.appState;
     const ingredientCard = ingredientList.map((ingredient: Ingredient, key: number) => 
       <div key={key} className={this.state.ingredientIdLeaving === ingredient.id? 
-        'ella-md-ingredient-item-leave ella-md-ingredient-item-leave-active' : ''}>
+        'ella-md-ingredient-item-leave ella-md-ingredient-item-leave-active' : 
+        'ella-md-ingredient-item-enter ella-md-ingredient-item-enter-active'}>
         <div className="pt-callout modifier ellamd-callout">
           <div className="ellamd-remove-ingredient" onClick={() => this.removeIngredient(ingredient.id)}>
             <span className="pt-icon-standard pt-icon-cross"></span>

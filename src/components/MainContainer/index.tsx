@@ -3,8 +3,6 @@ import { observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import { DatePicker } from '@blueprintjs/datetime';
 
-import "!style-loader!css-loader!sass-loader!./styles.scss";
-
 import Header from '../Header';
 import UserForm from '../UserForm';
 import FormulaFinder from '../FormulaFinder';
@@ -32,7 +30,7 @@ export default class MainContainer extends React.Component<{appState: AppState},
 							<div className="pt-navbar-heading">
 								Total Percentage {appState.totalPercentage}%
 							</div>
-							<button className="pt-button pt-minimal pt-icon-print">Print Formulation</button>
+							<button onClick={() => window.print()} className="pt-button pt-minimal pt-icon-print">Print Formulation</button>
 						</div>
 					</nav>
 				</div>
