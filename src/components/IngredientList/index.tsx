@@ -4,11 +4,12 @@ import { Slider, Button, Dialog } from "@blueprintjs/core";
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 
 import { Ingredient } from '../../interfaces';
+import {AppState} from '../..';
 
-const ANIMATION_TIME = 500;
+const ANIMATION_TIME = 300;
 
 @observer
-export default class IngredientList extends React.Component<{ appState: any }, any> {
+export default class IngredientList extends React.Component<{ appState: AppState }, any> {
   constructor (props: any) {
     super(props);
     this.onChangePercentage = this.onChangePercentage.bind(this);
@@ -30,7 +31,7 @@ export default class IngredientList extends React.Component<{ appState: any }, a
       this.props.appState.removeIngredient(ingredientId);
       this.setState({ingredientIdLeaving: ''});
     }
-    ,500);
+    , ANIMATION_TIME);
   }
 
   private addIngredient = (ingredient: Ingredient) => {
@@ -40,7 +41,7 @@ export default class IngredientList extends React.Component<{ appState: any }, a
         this.props.appState.addIngredientToFormula(ingredient);
         this.setState({ingredientIdLeaving: ''});
       }
-      ,300);
+      , ANIMATION_TIME);
     }
   }
   
@@ -124,6 +125,19 @@ export default class IngredientList extends React.Component<{ appState: any }, a
             <span className="pt-icon-standard pt-icon-add ellamd-big-icon"></span>
           </div>
         </div>
+        {(ingredientList.length === 0) && 
+          <div className="pt-non-ideal-state">
+            <div className="pt-non-ideal-state-visual pt-non-ideal-state-icon">
+              <span className="pt-icon pt-icon-folder-open"></span>
+            </div>
+            <h4 className="pt-non-ideal-state-title">This list is empty</h4>
+            <div className="pt-non-ideal-state-description">
+              You can add new ingredients to the list finding 
+              your formulation clicking on "Find your Formulation" or add new ingredients clicking on
+              <span className="pt-icon-standard pt-icon-add example-icon"/>
+            </div>
+          </div>
+        }
         {ingredientCard}
       </div>
     </div>

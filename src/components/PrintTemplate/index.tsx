@@ -12,11 +12,12 @@ export default class PrintTemplate extends React.Component<{appState: AppState},
         address,
         dateOfBirth
       },
+      toPdf,
       selectedFormula,
       ingredientList
     } = this.props.appState;
     return (
-      <div id="react-print">
+      <div id={toPdf ? 'to-pdf-print' : 'react-print'}>
         <h5>EllaMD Formulation</h5>
         <div className="print-card">
           <h5>Patient Information</h5>
@@ -72,7 +73,7 @@ export default class PrintTemplate extends React.Component<{appState: AppState},
                     {ingredient.name}
                   </td>   
                   <td>
-                    {ingredient.percentage}%
+                    {Math.round(ingredient.percentage*100)/100}%
                   </td>
                 </tr>
                 )}

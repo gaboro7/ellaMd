@@ -1,7 +1,7 @@
 import {observable, computed} from 'mobx';
 import { User, Formulation, Ingredient, FormulationIngredient } from '../interfaces';
 
-const baseUrl = 'https://testellamd-be.herokuapp.com';
+const BASE_URL = 'https://testellamd-be.herokuapp.com';
 
 export class AppState {
 	@observable user: User;
@@ -9,6 +9,7 @@ export class AppState {
 	@observable ingredientList: Array<Ingredient>;
 	@observable fullIngredientList: Array<Ingredient>;
 	@observable formulationList: Array<Formulation>;
+	@observable toPdf: boolean;
 
 	constructor() {
 		this.user = {
@@ -16,10 +17,11 @@ export class AppState {
 			address: '',
 			dateOfBirth: new Date()
 		};
+		this.toPdf = false;
 		this.formulationList = [];
 		this.fullIngredientList = [];
 		this.ingredientList = [];
-		fetch(`${baseUrl}/v1/formulations`,
+		fetch(`${BASE_URL}/v1/formulations`,
 		{
 			method: 'GET'
 		})
@@ -28,7 +30,7 @@ export class AppState {
 			this.formulationList = formulations;
 		});
 
-		fetch(`${baseUrl}/v1/ingredients`,
+		fetch(`${BASE_URL}/v1/ingredients`,
 		{
 			method: 'GET'
 		})
@@ -42,6 +44,10 @@ export class AppState {
 		this.user[key] = value;
 	}
 
+	changeToPdf(): void {
+		this.toPdf = !this.toPdf;
+	}
+
 	selectFormula(formula: Formulation): void {
 		this.selectedFormula = formula;
 		this.ingredientList = this.selectedFormula.formulationIngredients.map((formulationIngredient) => {
@@ -52,12 +58,12 @@ export class AppState {
 		);
 	}
 
-	removeIngredient(ingredientId: number) {
+	removeIngredient(ingredientId: number): void {
 		const ingredientIndex = this.ingredientList.findIndex((ingredient) => ingredient.id === ingredientId);
 		this.ingredientList.splice(ingredientIndex, 1);
 	}
 
-	changePercentage(ingredientId:number, percentage: number) {
+	changePercentage(ingredientId:number, percentage: number): void {
 		const ingredientIndex = this.ingredientList.findIndex((ingredient) => ingredient.id === ingredientId);
 		if (this.totalPercentage + percentage - this.ingredientList[ingredientIndex].percentage <= 100) {
 			this.ingredientList[ingredientIndex] = { ...this.ingredientList[ingredientIndex] , percentage };

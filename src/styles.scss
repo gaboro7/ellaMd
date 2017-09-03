@@ -6,6 +6,10 @@
   justify-content: center
 }
 
+.pt-dialog {
+  background: #fff;
+}
+
 .usuer-information-card-container {
   padding: 10px;
   margin: 10px;
@@ -55,7 +59,18 @@
 .ellamd-ingredient-list {
   width: 1222;
   max-height: 568px;
+  min-height: 568px;
   overflow: auto;
+}
+
+.example-icon {
+  color: #0f9960;
+  padding-left: 5px;
+
+}
+
+.pt-non-ideal-state {
+  height: 500px;
 }
 
 .ellamd-user-information {
@@ -137,43 +152,65 @@
   border: 1px solid #ccc;
 }
 
+@mixin printable() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h5 {
+    color: #106ba3;
+    font-weight: 600;
+    margin: 0 0 10px;
+    padding: 0;
+    line-height: 0.9em;
+    font-size: 17px;
+  }
+
+  label {
+    color: #182026;
+    font-weight: 500;
+    margin: 0 7px 14px 0;
+    font-size: 17px;
+  }
+  th {
+    label {
+      text-align: left;
+    }
+  }
+  .print-card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    border-radius: 3px;
+    width: 98%
+  }
+}
+
 @media print {
   #web-section {
     display: none;
   }
 
   #react-print {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    h5 {
-      color: #106ba3;
-      font-weight: 600;
-      margin: 0 0 10px;
-      padding: 0;
-      line-height: 0.9em;
-      font-size: 17px;
-    }
-  
-    label {
-      color: #182026;
-      font-weight: 500;
-      margin: 0 7px 14px 0;
-      font-size: 17px;
-    }
-    th {
-      label {
-        text-align: left;
-      }
-    }
-    .print-card {
-      padding: 10px;
-      border: 1px solid #ccc;
-      margin: 5px;
-      border-radius: 3px;
-      width: 80%
-    }
+    @include printable();
   }
 
-  
+}
+
+#to-pdf-print {
+  @include printable();
+  background: #fff;
+  padding: 30px;
+  h5 {
+    font-size: 20px;
+  }
+
+  label {
+    color: #182026;
+    font-weight: 500;
+    margin: 0 7px 14px 0;
+    font-size: 20px;
+  }
+  td {
+    font-size: 20px;
+  }
 }

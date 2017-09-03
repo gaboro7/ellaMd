@@ -9,7 +9,6 @@ export { AppState } from './store/AppStore'; // lazy
 import "!style-loader!css-loader!sass-loader!./styles.scss";
 
 const appState =  new AppState();
-
 class App extends React.Component<{appState: AppState}, {}> {
 	render() {
 		return (
@@ -27,4 +26,3 @@ class App extends React.Component<{appState: AppState}, {}> {
 
 
 ReactDOM.render(<App appState={appState}/>, document.getElementById('root'));
-//ReactDOM.render(<PrintTemplate appState={appState}/>, document.getElementById('print-mount'));
