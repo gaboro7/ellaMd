@@ -25,8 +25,8 @@ export default class MainContainer extends React.Component<{appState: AppState},
 			var pdf = new jsPDF('p','pt','a4', true);
 			const source = window.document.getElementById("to-pdf-print");
 			pdf.addHTML(source, function() {
-					//pdf.save('web.pdf');
-				pdf.output('dataurlnewwindow');
+				pdf.save('web.pdf');
+				//pdf.output('dataurlnewwindow');
 			});
 			this.props.appState.changeToPdf();
 		},0);
