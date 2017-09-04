@@ -1,7 +1,7 @@
 import * as React from "react";
 import { observer } from 'mobx-react'
 import { Slider, Button, Dialog } from "@blueprintjs/core";
-import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { Ingredient } from '../../interfaces';
 import {AppState} from '../..';
@@ -19,12 +19,12 @@ export default class IngredientList extends React.Component<{ appState: AppState
     this.state = { ingredientIdLeaving: '', isOpen: false };
   }
 
- 
+
   //hack I can't call a mobx action from anonimus functions
   private changePercentage = (ingredientId: number, value: number) => {
     this.props.appState.changePercentage(ingredientId, value);
   }
-  
+
   private removeIngredient = (ingredientId: number) => {
     this.setState({ingredientIdLeaving: ingredientId});
     setTimeout(() => {
@@ -44,18 +44,18 @@ export default class IngredientList extends React.Component<{ appState: AppState
       , ANIMATION_TIME);
     }
   }
-  
+
   private onChangePercentage = (ingredientId: number) => {
     return (value: number) => this.changePercentage(ingredientId, value);
   }
 
   private toggleDialog = () => this.setState({ isOpen: !this.state.isOpen });
-  
+
   render () {
     const { ingredientList, notUsedIngredients } = this.props.appState;
-    const ingredientCard = ingredientList.map((ingredient: Ingredient, key: number) => 
-      <div key={key} className={this.state.ingredientIdLeaving === ingredient.id? 
-        'ella-md-ingredient-item-leave ella-md-ingredient-item-leave-active' : 
+    const ingredientCard = ingredientList.map((ingredient: Ingredient, key: number) =>
+      <div key={key} className={this.state.ingredientIdLeaving === ingredient.id?
+        'ella-md-ingredient-item-leave ella-md-ingredient-item-leave-active' :
         'ella-md-ingredient-item-enter ella-md-ingredient-item-enter-active'}>
         <div className="pt-callout modifier ellamd-callout">
           <div className="ellamd-remove-ingredient" onClick={() => this.removeIngredient(ingredient.id)}>
@@ -70,7 +70,7 @@ export default class IngredientList extends React.Component<{ appState: AppState
           </div>
           <div className="ellamd-slide">
             <div>
-              Persentage: 
+              Percentage:
             </div>
             <div>
               <Slider
@@ -83,7 +83,7 @@ export default class IngredientList extends React.Component<{ appState: AppState
                 />
             </div>
           </div>
-        </div>     
+        </div>
       </div>
     );
 
@@ -95,8 +95,8 @@ export default class IngredientList extends React.Component<{ appState: AppState
           title="Add a new ingredient"
         >
           <div className="pt-dialog-body ella-md-dialog">
-            {notUsedIngredients.map((ingredient, key) => 
-              <div key={key} className={this.state.ingredientIdLeaving === ingredient.id? 
+            {notUsedIngredients.map((ingredient, key) =>
+              <div key={key} className={this.state.ingredientIdLeaving === ingredient.id?
                 'ella-md-ingredient-item-leave ella-md-ingredient-item-leave-active' : ''}>
                 <div className="pt-callout modifier ellamd-callout">
                   <h5>{ingredient.name}</h5>
@@ -109,13 +109,13 @@ export default class IngredientList extends React.Component<{ appState: AppState
                       <span className="pt-tag pt-intent-success ellamd-tag" key={key}>{name}</span>
                     )}
                   </div>
-                </div>     
+                </div>
               </div>
             )}
           </div>
         </Dialog>
       </div>);
-    
+
     return <div className="ellamd-card">
       <div className="pt-card pt-elevation-1 ellamd-ingredient-list">
         {dialog}
@@ -125,14 +125,14 @@ export default class IngredientList extends React.Component<{ appState: AppState
             <span className="pt-icon-standard pt-icon-add ellamd-big-icon"></span>
           </div>
         </div>
-        {(ingredientList.length === 0) && 
+        {(ingredientList.length === 0) &&
           <div className="pt-non-ideal-state">
             <div className="pt-non-ideal-state-visual pt-non-ideal-state-icon">
               <span className="pt-icon pt-icon-folder-open"></span>
             </div>
             <h4 className="pt-non-ideal-state-title">This list is empty</h4>
             <div className="pt-non-ideal-state-description">
-              You can add new ingredients to the list finding 
+              You can add new ingredients to the list finding
               your formulation clicking on "Find your Formulation" or add new ingredients clicking on
               <span className="pt-icon-standard pt-icon-add example-icon"/>
             </div>
