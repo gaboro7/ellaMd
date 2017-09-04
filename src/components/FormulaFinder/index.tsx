@@ -34,9 +34,9 @@ export default class FormulaFinder extends React.Component<{appState: AppState},
             return item.name.toLocaleUpperCase().indexOf(query.toLocaleUpperCase()) !== -1;
           }}
           itemRenderer={(value) => {
-            return <MenuItem 
+            return <MenuItem
               key={value.item.id}
-              label={''}  
+              label={''}
               onClick={value.handleClick}
               text={value.item.name}
             />;
@@ -44,17 +44,17 @@ export default class FormulaFinder extends React.Component<{appState: AppState},
           noResults={<MenuItem disabled text="No results." />}
           onItemSelect={this.onSelectFormula}
         >
-          <Button 
+          <Button
             text={
               selectedFormula && selectedFormula.id ?
               formulationList.find((formula) => formula.id === selectedFormula.id).name :
-              'Formlations'
-            } 
-            rightIconName="double-caret-vertical" 
+              'Formulations'
+            }
+            rightIconName="double-caret-vertical"
             className="pt-large"
           />
         </FormulaSelect>
-      </div> 
+      </div>
     );
   }
 }
